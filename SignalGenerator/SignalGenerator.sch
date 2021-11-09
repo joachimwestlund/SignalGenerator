@@ -16,12 +16,12 @@ $EndDescr
 $Comp
 L Interface:AD9833xRM U?
 U 1 1 6131BF32
-P 5350 3360
-F 0 "U?" H 5994 3406 50  0000 L CNN
-F 1 "AD9833xRM" H 5994 3315 50  0000 L CNN
-F 2 "Package_SO:MSOP-10_3x3mm_P0.5mm" H 5350 2760 50  0001 C CNN
-F 3 "https://www.analog.com/media/en/technical-documentation/data-sheets/ad9833.pdf" H 5300 3660 50  0001 C CNN
-	1    5350 3360
+P 3270 4390
+F 0 "U?" H 3800 4030 50  0000 L CNN
+F 1 "AD9833xRM" H 3530 3940 50  0000 L CNN
+F 2 "Package_SO:MSOP-10_3x3mm_P0.5mm" H 3270 3790 50  0001 C CNN
+F 3 "https://www.analog.com/media/en/technical-documentation/data-sheets/ad9833.pdf" H 3220 4690 50  0001 C CNN
+	1    3270 4390
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -518,8 +518,6 @@ Wire Wire Line
 	7920 3270 7920 3340
 Wire Wire Line
 	8320 3420 8320 3510
-Wire Wire Line
-	7620 3460 5950 3460
 $Comp
 L Connector:Conn_Coaxial J?
 U 1 1 617AB915
@@ -585,4 +583,90 @@ Wire Wire Line
 	7470 5020 7900 5020
 Text Notes 8490 4770 0    50   ~ 0
 G=1k/93+1
+$Comp
+L Switch:SW_Push_SPDT SW?
+U 1 1 618B491B
+P 6520 2920
+F 0 "SW?" H 6520 3205 50  0000 C CNN
+F 1 "SW_Push_SPDT" H 6520 3114 50  0000 C CNN
+F 2 "" H 6520 2920 50  0001 C CNN
+F 3 "~" H 6520 2920 50  0001 C CNN
+	1    6520 2920
+	-1   0    0    1   
+$EndComp
+Text GLabel 5620 2810 1    50   Input ~ 0
++12V
+$Comp
+L Device:R_POT RV?
+U 1 1 618DC911
+P 5620 3020
+F 0 "RV?" H 5550 3066 50  0000 R CNN
+F 1 "1k" H 5550 2975 50  0000 R CNN
+F 2 "" H 5620 3020 50  0001 C CNN
+F 3 "~" H 5620 3020 50  0001 C CNN
+	1    5620 3020
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5620 2810 5620 2870
+Text GLabel 5620 3240 3    50   Input ~ 0
+-12V
+Wire Wire Line
+	5620 3170 5620 3240
+Wire Wire Line
+	5770 3020 6320 3020
+$Comp
+L power:GND #PWR?
+U 1 1 618FD81E
+P 6040 2820
+F 0 "#PWR?" H 6040 2570 50  0001 C CNN
+F 1 "GND" H 6045 2647 50  0000 C CNN
+F 2 "" H 6040 2820 50  0001 C CNN
+F 3 "" H 6040 2820 50  0001 C CNN
+	1    6040 2820
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	6320 2820 6040 2820
+Text GLabel 4010 4490 2    50   Input ~ 0
+VOut
+Wire Wire Line
+	3870 4490 4010 4490
+Text GLabel 6540 3460 0    50   Input ~ 0
+Vout
+$Comp
+L Device:R R?
+U 1 1 619165E3
+P 6820 3460
+F 0 "R?" H 6890 3506 50  0000 L CNN
+F 1 "1k" H 6890 3415 50  0000 L CNN
+F 2 "" V 6750 3460 50  0001 C CNN
+F 3 "~" H 6820 3460 50  0001 C CNN
+	1    6820 3460
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	6540 3460 6670 3460
+Wire Wire Line
+	6970 3460 7300 3460
+$Comp
+L Device:R R?
+U 1 1 6191B2D4
+P 7300 3200
+F 0 "R?" H 7370 3246 50  0000 L CNN
+F 1 "1k" H 7370 3155 50  0000 L CNN
+F 2 "" V 7230 3200 50  0001 C CNN
+F 3 "~" H 7300 3200 50  0001 C CNN
+	1    7300 3200
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	7300 3350 7300 3460
+Connection ~ 7300 3460
+Wire Wire Line
+	7300 3460 7620 3460
+Wire Wire Line
+	6720 2920 7300 2920
+Wire Wire Line
+	7300 2920 7300 3050
 $EndSCHEMATC
