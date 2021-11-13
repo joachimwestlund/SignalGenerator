@@ -16,12 +16,12 @@ $EndDescr
 $Comp
 L Interface:AD9833xRM U?
 U 1 1 6131BF32
-P 3270 4390
-F 0 "U?" H 3800 4030 50  0000 L CNN
-F 1 "AD9833xRM" H 3530 3940 50  0000 L CNN
-F 2 "Package_SO:MSOP-10_3x3mm_P0.5mm" H 3270 3790 50  0001 C CNN
-F 3 "https://www.analog.com/media/en/technical-documentation/data-sheets/ad9833.pdf" H 3220 4690 50  0001 C CNN
-	1    3270 4390
+P 3250 4690
+F 0 "U?" H 3780 4330 50  0000 L CNN
+F 1 "AD9833xRM" H 3510 4240 50  0000 L CNN
+F 2 "Package_SO:MSOP-10_3x3mm_P0.5mm" H 3250 4090 50  0001 C CNN
+F 3 "https://www.analog.com/media/en/technical-documentation/data-sheets/ad9833.pdf" H 3200 4990 50  0001 C CNN
+	1    3250 4690
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -481,7 +481,7 @@ F 3 "" H 8320 3420 50  0001 C CNN
 	1    8320 3420
 	-1   0    0    1   
 $EndComp
-Text GLabel 7920 3170 1    50   Input ~ 0
+Text GLabel 7920 2970 1    50   Input ~ 0
 +12V
 Text GLabel 7920 4350 3    50   Input ~ 0
 -12V
@@ -497,11 +497,11 @@ F 3 "~" H 8120 4070 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	7920 3170 7920 3270
+	7920 2970 7920 3100
 Wire Wire Line
 	8120 3890 8120 3920
 Wire Wire Line
-	7920 3980 7920 4250
+	7920 3980 7920 4140
 Wire Wire Line
 	8120 4220 8120 4250
 Wire Wire Line
@@ -529,8 +529,6 @@ F 3 " ~" H 9760 3660 50  0001 C CNN
 	1    9760 3660
 	1    0    0    -1  
 $EndComp
-Wire Wire Line
-	8520 3660 9000 3660
 $Comp
 L power:GND #PWR?
 U 1 1 617B031D
@@ -544,45 +542,6 @@ F 3 "" H 9760 3970 50  0001 C CNN
 $EndComp
 Wire Wire Line
 	9760 3860 9760 3970
-$Comp
-L Device:R R?
-U 1 1 617B2257
-P 9000 4150
-F 0 "R?" H 9070 4196 50  0000 L CNN
-F 1 "1k" H 9070 4105 50  0000 L CNN
-F 2 "" V 8930 4150 50  0001 C CNN
-F 3 "~" H 9000 4150 50  0001 C CNN
-	1    9000 4150
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	9000 4000 9000 3660
-Connection ~ 9000 3660
-Wire Wire Line
-	9000 3660 9560 3660
-$Comp
-L Device:R R?
-U 1 1 617B4754
-P 8050 5020
-F 0 "R?" V 7843 5020 50  0000 C CNN
-F 1 "93" V 7934 5020 50  0000 C CNN
-F 2 "" V 7980 5020 50  0001 C CNN
-F 3 "~" H 8050 5020 50  0001 C CNN
-	1    8050 5020
-	0    1    1    0   
-$EndComp
-Wire Wire Line
-	9000 4300 9000 5020
-Wire Wire Line
-	9000 5020 8200 5020
-Wire Wire Line
-	7620 3860 7470 3860
-Wire Wire Line
-	7470 3860 7470 5020
-Wire Wire Line
-	7470 5020 7900 5020
-Text Notes 8490 4770 0    50   ~ 0
-G=1k/93+1
 $Comp
 L Switch:SW_Push_SPDT SW?
 U 1 1 618B491B
@@ -628,10 +587,10 @@ F 3 "" H 6040 2820 50  0001 C CNN
 $EndComp
 Wire Wire Line
 	6320 2820 6040 2820
-Text GLabel 4010 4490 2    50   Input ~ 0
+Text GLabel 3990 4790 2    50   Input ~ 0
 VOut
 Wire Wire Line
-	3870 4490 4010 4490
+	3850 4790 3990 4790
 Text GLabel 6540 3460 0    50   Input ~ 0
 Vout
 $Comp
@@ -669,4 +628,142 @@ Wire Wire Line
 	6720 2920 7300 2920
 Wire Wire Line
 	7300 2920 7300 3050
+Wire Wire Line
+	8520 3660 9020 3660
+$Comp
+L Device:R R?
+U 1 1 618FD982
+P 7690 5060
+F 0 "R?" V 7483 5060 50  0000 C CNN
+F 1 "1k" V 7574 5060 50  0000 C CNN
+F 2 "" V 7620 5060 50  0001 C CNN
+F 3 "~" H 7690 5060 50  0001 C CNN
+	1    7690 5060
+	0    1    1    0   
+$EndComp
+$Comp
+L Device:R_POT RV?
+U 1 1 618FF066
+P 9020 4380
+F 0 "RV?" H 8950 4426 50  0000 R CNN
+F 1 "50k" H 8950 4335 50  0000 R CNN
+F 2 "" H 9020 4380 50  0001 C CNN
+F 3 "~" H 9020 4380 50  0001 C CNN
+	1    9020 4380
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	9020 4230 9020 4010
+Connection ~ 9020 3660
+Wire Wire Line
+	9020 3660 9560 3660
+Wire Wire Line
+	9020 4530 9020 5060
+Wire Wire Line
+	9020 5060 7840 5060
+Wire Wire Line
+	8870 4380 8750 4380
+Wire Wire Line
+	8750 4380 8750 4010
+Wire Wire Line
+	8750 4010 9020 4010
+Connection ~ 9020 4010
+Wire Wire Line
+	9020 4010 9020 3660
+Wire Wire Line
+	7620 3860 7260 3860
+Wire Wire Line
+	7260 3860 7260 5060
+Wire Wire Line
+	7260 5060 7540 5060
+$Comp
+L Device:C C?
+U 1 1 6191899E
+P 7660 4140
+F 0 "C?" H 7775 4186 50  0000 L CNN
+F 1 "100nF" H 7775 4095 50  0000 L CNN
+F 2 "" H 7698 3990 50  0001 C CNN
+F 3 "~" H 7660 4140 50  0001 C CNN
+	1    7660 4140
+	0    1    1    0   
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 61918FD4
+P 7390 4240
+F 0 "#PWR?" H 7390 3990 50  0001 C CNN
+F 1 "GND" H 7395 4067 50  0000 C CNN
+F 2 "" H 7390 4240 50  0001 C CNN
+F 3 "" H 7390 4240 50  0001 C CNN
+	1    7390 4240
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	7510 4140 7390 4140
+Wire Wire Line
+	7390 4140 7390 4240
+Wire Wire Line
+	7810 4140 7920 4140
+Connection ~ 7920 4140
+Wire Wire Line
+	7920 4140 7920 4250
+$Comp
+L Device:C C?
+U 1 1 61920E4D
+P 8640 3100
+F 0 "C?" H 8755 3146 50  0000 L CNN
+F 1 "100nF" H 8755 3055 50  0000 L CNN
+F 2 "" H 8678 2950 50  0001 C CNN
+F 3 "~" H 8640 3100 50  0001 C CNN
+	1    8640 3100
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	8490 3100 7920 3100
+Connection ~ 7920 3100
+Wire Wire Line
+	7920 3100 7920 3270
+$Comp
+L power:GND #PWR?
+U 1 1 61923E3C
+P 8980 3220
+F 0 "#PWR?" H 8980 2970 50  0001 C CNN
+F 1 "GND" H 8985 3047 50  0000 C CNN
+F 2 "" H 8980 3220 50  0001 C CNN
+F 3 "" H 8980 3220 50  0001 C CNN
+	1    8980 3220
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	8790 3100 8980 3100
+Wire Wire Line
+	8980 3100 8980 3220
+$Comp
+L power:GND #PWR?
+U 1 1 6192AAD0
+P 3350 5400
+F 0 "#PWR?" H 3350 5150 50  0001 C CNN
+F 1 "GND" H 3355 5227 50  0000 C CNN
+F 2 "" H 3350 5400 50  0001 C CNN
+F 3 "" H 3350 5400 50  0001 C CNN
+	1    3350 5400
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 6192BA48
+P 3150 5400
+F 0 "#PWR?" H 3150 5150 50  0001 C CNN
+F 1 "GND" H 3155 5227 50  0000 C CNN
+F 2 "" H 3150 5400 50  0001 C CNN
+F 3 "" H 3150 5400 50  0001 C CNN
+	1    3150 5400
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3150 5190 3150 5400
+Wire Wire Line
+	3350 5190 3350 5400
+Text Notes 2560 5740 0    50   ~ 0
+Spit/star ground for digital and analog
 $EndSCHEMATC
