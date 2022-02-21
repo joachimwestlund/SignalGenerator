@@ -7,7 +7,7 @@
   (paper "A4")
   (title_block
     (title "Signal Generator")
-    (rev "0.1")
+    (rev "0.2")
     (company "Joachim Westlund")
   )
 
