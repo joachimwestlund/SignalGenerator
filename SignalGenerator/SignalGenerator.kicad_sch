@@ -3449,7 +3449,7 @@
     (property "Value" "25k" (id 1) (at 232.156 67.8179 0)
       (effects (font (size 1.27 1.27)) (justify right))
     )
-    (property "Footprint" "" (id 2) (at 229.362 66.548 0)
+    (property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical" (id 2) (at 229.362 66.548 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Datasheet" "~" (id 3) (at 229.362 66.548 0)
@@ -3640,7 +3640,7 @@
     (property "Value" "1k" (id 1) (at 172.72 33.2739 0)
       (effects (font (size 1.27 1.27)) (justify right))
     )
-    (property "Footprint" "" (id 2) (at 175.26 32.004 0)
+    (property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical" (id 2) (at 175.26 32.004 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Datasheet" "~" (id 3) (at 175.26 32.004 0)
@@ -4044,10 +4044,10 @@
       (reference "R8") (unit 1) (value "50") (footprint "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder")
     )
     (path "/b56b0fa3-3e7f-4c85-bcf3-d61be9c95bdd"
-      (reference "RV1") (unit 1) (value "1k") (footprint "")
+      (reference "RV1") (unit 1) (value "1k") (footprint "Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical")
     )
     (path "/05ab5460-9dc3-448d-a9a8-4c16ae09a4eb"
-      (reference "RV2") (unit 1) (value "25k") (footprint "")
+      (reference "RV2") (unit 1) (value "25k") (footprint "Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical")
     )
     (path "/00000000-0000-0000-0000-0000618b491b"
       (reference "SW1") (unit 1) (value "SW_Push_SPDT") (footprint "Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical")
