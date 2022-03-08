@@ -2,9 +2,7 @@
 # Automatically-generated file. Do not edit or delete the file
 ################################################################################
 
-i2cmaster.S
-
-I2C_LCD_NHD_0420.c
+i2c\i2c.c
 
 main.c
 
