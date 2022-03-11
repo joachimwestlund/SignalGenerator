@@ -1,8 +1,10 @@
+/** \File */
+
 /*
  * i2c.h
  *
  * Created: 2022-02-27 14:24:28
- *  Author: Joachim Westlund
+ * Author: Joachim Westlund
  */ 
 
 
