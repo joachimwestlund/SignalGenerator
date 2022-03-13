@@ -101,9 +101,9 @@ int main(void)
 	
 	I2C_Init();
 	
-	if ((status = I2C_WriteByte(0x50, 0x41)) != 0)	// send an 'A' to LCD
+	if ((status = I2C_WriteString(0x50, str, 0x05)) != 0)	// send an 'A' to LCD
 	{
-		PORTD = ~(status);
+		PORTD = ~(status);	// invert output to leds so they are shown correctly.
 	}
 	else
 		PORTD = 0xff;	// means all leds are off. status OK! ;)

@@ -126,15 +126,21 @@ uint8_t I2C_WriteString(uint8_t addr, uint8_t *data, uint8_t size)
 	uint8_t i = 0;
 	
 	I2C_Start();
+	status = I2C_GetStatus();
 	if (status != 0x08)
 		return(status);
 
 	addr &= 0b11111110;		// write mode
 	
+	I2C_Write(addr);
+	status = I2C_GetStatus();
+	if (status != 0x18)
+		return(status);
+	
 	for (i = 0; i < size; i++)
 	{
-		I2C_Write(data[i]);
-		if (status != 0x28)
+		I2C_Write(*data++);
+		if (status != 0x18)
 			return(status);
 	}
 	
@@ -142,32 +148,3 @@ uint8_t I2C_WriteString(uint8_t addr, uint8_t *data, uint8_t size)
 	
 	return(0);
 }
-
-
-
-
-// example code to write a byte to an eeprom.. Exchange TWI for I2C_
-/*
-uint8_t EEWriteByte(uint16_t u16addr, uint8_t u8data)
-{
-	TWIStart();
-	if (TWIGetStatus() != 0x08)
-	return ERROR;
-	//select devise and send A2 A1 A0 address bits
-	TWIWrite((EEDEVADR)|(uint8_t)((u16addr & 0x0700)>>7));
-	if (TWIGetStatus() != 0x18)
-	return ERROR;
-	//send the rest of address
-	TWIWrite((uint8_t)(u16addr));
-	if (TWIGetStatus() != 0x28)
-	return ERROR;
-	//write byte to eeprom
-	TWIWrite(u8data);
-	if (TWIGetStatus() != 0x28)
-	return ERROR;
-	TWIStop();
-	return SUCCESS;
-}
-
-
-*/
