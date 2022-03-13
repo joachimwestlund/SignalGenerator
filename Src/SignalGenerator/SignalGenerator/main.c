@@ -47,30 +47,87 @@ code below
 
 #include <avr/interrupt.h>
 
+#include "i2c/i2c.h"
+
+/** check my schematic on rotary encoder for A and B */
+volatile uint8_t A_trace = 0;
+/** check my schematic on rotary encoder for A and B */
+volatile uint8_t B_trace = 0;
+
+volatile uint8_t count = 0;
+
+ISR(INT0_vect) 
+{
+	PORTD |= (0x01 << 7);	// set pin 8 high
+	
+	if (B_trace == 0x01)
+	{
+		count--;
+		A_trace = 0;
+		B_trace = 0;
+	}
+	else
+	{
+		A_trace = 0x01;	
+	}
+}
+
+ISR(INT1_vect)
+{
+	PORTD &= ~(0x01 << 7);	// set pin 8 low
+	
+	if (A_trace == 0x01)
+	{
+		count++;
+		A_trace = 0;
+		B_trace = 0;
+	}
+	else
+	{
+		B_trace = 0x01;
+	}
+}
+
 
 int main(void)
 {	
-	DDRD &= 0b11110011		// clear bit 2 and 3 so they are inputs
-	DDRD |= 0b11110011		// set all the others to outputs we could have done DDRD = 0b11110011
-							// but i need a refresher on bitwise operations.
+	uint8_t status = 0;
+	uint8_t *str = (uint8_t*)"Jocke";
 	
-	PORTD = 0b00001100		// enable pullup resistors on the inputs or set them as high
+	DDRD |= 0xff;
+	PORTD = 0x00;
+		
+	_delay_ms(1);		// delay so the LCD can initialize
 	
-	EICRA |= (0b10 << 2) | (0b10 << ISC00);
+	I2C_Init();
 	
-	EIMSK = 0b00000011;
+	if ((status = I2C_WriteByte(0x50, 0x41)) != 0)	// send an 'A' to LCD
+	{
+		PORTD = ~(status);
+	}
+	else
+		PORTD = 0xff;	// means all leds are off. status OK! ;)
+		
+	//PORTD = ~0x04;		
+
+/*	
+	DDRD |= 0b10000000;		// Set MSB to 1 to make it an output
+	DDRD &= 0b11110011;		// clear bit 2 and 3 so they are inputs
+
+	PORTD |= 0b10001100;		// enable pull up resistors on the inputs and on PD2,3 and 7.
+		
+	EICRA = 0b00001010;			// Set up external interrupt control register A to falling edge on of INT1 and INT0
+	
+	EIMSK = 0b00000011;		// enable the two interrupts
 	
 	sei();
-	
-	
-	
-    /* Replace with your application code */
+	*/
     while (1) 
     {
-		PORTD &= 0b01111111;
-		_delay_ms(100);
-		PORTD &= 0b11111111;
-		_delay_ms(100);
+//		PORTD &= 0b01111111;
+//		_delay_ms(1000);
+//		PORTD &= 0b11111111;
+//		_delay_ms(1000);
     }
 }
 
