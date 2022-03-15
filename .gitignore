@@ -1,2 +1,6 @@
 SignalGenerator/SignalGenerator-backups/
 PowerSupply/SignalGenerator-backups/
+*.bak
+*.kicad_pcb-bak
+*.zip
+fp-info-cache
