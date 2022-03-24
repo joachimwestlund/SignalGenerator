@@ -54,39 +54,13 @@ volatile uint8_t A_trace = 0;
 /** check my schematic on rotary encoder for A and B */
 volatile uint8_t B_trace = 0;
 
+volatile uint8_t right = 0;
+volatile uint8_t left = 0;
+
 volatile uint8_t count = 0;
 
-ISR(INT0_vect) 
-{
-	PORTD |= (0x01 << 7);	// set pin 8 high
-	
-	if (B_trace == 0x01)
-	{
-		count--;
-		A_trace = 0;
-		B_trace = 0;
-	}
-	else
-	{
-		A_trace = 0x01;	
-	}
-}
+volatile uint8_t updateLCD = 0;
 
-ISR(INT1_vect)
-{
-	PORTD &= ~(0x01 << 7);	// set pin 8 low
-	
-	if (A_trace == 0x01)
-	{
-		count++;
-		A_trace = 0;
-		B_trace = 0;
-	}
-	else
-	{
-		B_trace = 0x01;
-	}
-}
 
 
 int main(void)
@@ -97,37 +71,75 @@ int main(void)
 	DDRD |= 0xff;
 	PORTD = 0x00;
 		
-	_delay_ms(1);		// delay so the LCD can initialize
+	_delay_ms(100);		// delay so the LCD can initialize
 	
 	I2C_Init();
 	
 	if ((status = I2C_WriteString(0x50, str, 0x05)) != 0)	// send an 'A' to LCD
 	{
-		PORTD = ~(status);	// invert output to leds so they are shown correctly.
+		PORTD = ~(status);									// invert output to LEDS so they are shown correctly.
+		while(1) {}											// Halt program
 	}
 	else
-		PORTD = 0xff;	// means all leds are off. status OK! ;)
+		PORTD = 0xff;										// means all leds are off. status OK! ;)
 		
-	//PORTD = ~0x04;		
-
-/*	
-	DDRD |= 0b10000000;		// Set MSB to 1 to make it an output
-	DDRD &= 0b11110011;		// clear bit 2 and 3 so they are inputs
-
-	PORTD |= 0b10001100;		// enable pull up resistors on the inputs and on PD2,3 and 7.
 		
-	EICRA = 0b00001010;			// Set up external interrupt control register A to falling edge on of INT1 and INT0
+
+	DDRD |= 0b00000000;										// Set all pins to 1 to make it outputs
+	DDRD &= 0b10011111;										// clear bit 5 and 6 so they are inputs for rotary encoder
+
+	PORTD |= 0b10001100;									// disable pull up resistors on PORTD.
 	
-	EIMSK = 0b00000011;		// enable the two interrupts
 	
-	sei();
-	*/
     while (1) 
     {
-//		PORTD &= 0b01111111;
-//		_delay_ms(1000);
-//		PORTD &= 0b11111111;
-//		_delay_ms(1000);
+		if ((PIND & (1 << PIND5)) == (1 << PIND5)) 
+		{
+			// pin is high, do nothing
+		} 
+		else
+		{
+			if (left == 0)
+			{
+				right = 1;
+				A_trace = 1;
+			}
+		}
+		if ((PIND & (1 << PIND6)) == (1 << PIND6))
+		{
+			// pin high, do nothing
+		}
+		else
+		{
+			if (right == 0)
+			{
+				left = 1;
+				B_trace = 1;
+			}
+		}
+		
+		if (A_trace == 1 && B_trace == 1)
+		{
+			if (right == 1)
+			{
+				count++;
+				updateLCD = 1;
+			}
+			if (left == 1)
+			{
+				count--;
+				updateLCD = 1;
+			}
+			A_trace = 0;
+			B_trace = 0;
+			right = 0;
+			left = 0;
+		}
+		
+		if (updateLCD == 1)
+		{
+			I2C_WriteByte(0x50, 65);
+		}
     }
 }
 
