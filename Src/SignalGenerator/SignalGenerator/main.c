@@ -46,6 +46,7 @@ NEW: https://www.youtube.com/watch?v=ZDtRWmBMCmw
 #include <util/delay.h>
 #include <avr/interrupt.h>
 #include <stdio.h>
+#include <string.h>
 
 #include "i2c/i2c.h"
 #include "NHC_LCD/NHC_LCD.h"
@@ -58,8 +59,8 @@ volatile uint8_t B_trace = 0;
 volatile uint8_t right = 0;
 volatile uint8_t left = 0;
 
-volatile uint8_t count = 3;
-char count_buf[9] = {0};
+volatile uint8_t count = 0;
+char count_buf[4] = {0};
 
 volatile uint8_t updateLCD = 1;
 
@@ -68,17 +69,18 @@ volatile uint8_t updateLCD = 1;
 int main(void)
 {	
 	uint8_t status = 0;
-	uint8_t *str = (uint8_t*)"Jocke";
-	uint8_t *str1 = (uint8_t*)"rules";
+	uint8_t *str = (uint8_t*)"Rotary Encoder";
 	
 	DDRD |= 0xff;
-	PORTD = 0x00;
+	PORTD = 0xff;
 		
 	_delay_ms(100);		// delay so the LCD can initialize
 	
 	I2C_Init();
 	
-	if ((status = I2C_WriteString(0x50, str, 0x05)) != 0)	// send an 'A' to LCD
+	LCD_WriteCommand(0x50, 0x51, 0x00);
+	_delay_ms(2);
+	if ((status = I2C_WriteString(0x50, str, strlen((char *)str))) != 0)	// send an 'A' to LCD
 	{
 		PORTD = ~(status);									// invert output to LEDS so they are shown correctly.
 		while(1) {}											// Halt program
@@ -92,13 +94,6 @@ int main(void)
 
 	PORTD = 0x02;									
 	
-	_delay_ms(2);
-	LCD_WriteCommand(0x50, 0x46);
-	_delay_ms(2);
-	I2C_WriteString(0x50, str1, 0x05);	
-
-
-
     while (1) 
     {
 		/*
@@ -147,8 +142,11 @@ int main(void)
 		*/
 		if (updateLCD == 1)
 		{
-			snprintf(count_buf, 0x09, "%08d", count);
-			I2C_WriteString(0x50, (uint8_t *)count_buf, 0x08);
+			_delay_ms(2);
+			LCD_WriteCommand(0x50, 0x45, 0x40);
+			snprintf(count_buf, 0x04, "%03d", count);
+			_delay_ms(2);
+			I2C_WriteString(0x50, (uint8_t *)count_buf, 0x03);
 			updateLCD = 0;
 		}
 		

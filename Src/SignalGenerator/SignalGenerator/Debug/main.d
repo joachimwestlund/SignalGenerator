@@ -17,6 +17,7 @@ main.d main.o: .././main.c \
  d:\program\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdio.h \
  d:\program\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdarg.h \
  d:\program\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stddef.h \
+ d:\program\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\string.h \
  .././i2c/i2c.h .././NHC_LCD/NHC_LCD.h .././NHC_LCD/../i2c/i2c.h
 
 d:\program\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\io.h:
@@ -54,6 +55,8 @@ d:\program\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdio.
 d:\program\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdarg.h:
 
 d:\program\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stddef.h:
+
+d:\program\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\string.h:
 
 .././i2c/i2c.h:
 

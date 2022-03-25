@@ -1,3 +1,5 @@
+/** \File */
+
 /*
  * NHC_LCD.h
  *
@@ -12,7 +14,10 @@
 
 #include "../i2c/i2c.h"
 
-uint8_t LCD_WriteCommand(uint8_t addr, uint8_t command);
+/**
+ *	Pass 0 to data if no data is needed for the command
+ */
+uint8_t LCD_WriteCommand(uint8_t addr, uint8_t command, uint8_t data);
 
 
 #endif /* NHC_LCD_H_ */

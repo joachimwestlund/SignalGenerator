@@ -1,3 +1,5 @@
+/** \File */
+
 /*
  * NHC_LCD.c
  *
@@ -7,7 +9,7 @@
 
 #include "NHC_LCD.h"
 
-uint8_t LCD_WriteCommand(uint8_t addr, uint8_t command)
+uint8_t LCD_WriteCommand(uint8_t addr, uint8_t command, uint8_t data)
 {
 	uint8_t status = 0;
 	
@@ -21,17 +23,25 @@ uint8_t LCD_WriteCommand(uint8_t addr, uint8_t command)
 	I2C_Write(addr);
 	status = I2C_GetStatus();
 	if (status != 0x18)
-	return(status);
+		return(status);
 	
 	I2C_Write(0xfe);
 	status = I2C_GetStatus();
 	if (status != 0x28)
-	return(status);
+		return(status);
 	
 	I2C_Write(command);
 	status = I2C_GetStatus();
 	if (status != 0x28)
-	return(status);
+		return(status);
+	
+	if (data != 0)
+	{
+		I2C_Write(data);
+		status = I2C_GetStatus();
+		if (status != 0x28)
+			return(status);
+	}
 	
 	I2C_Stop();
 	
