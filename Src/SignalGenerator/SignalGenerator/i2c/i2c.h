@@ -30,9 +30,10 @@ void I2C_Stop(void);
 void I2C_Write(uint8_t);
 uint8_t I2C_ReadACK(void);
 uint8_t I2C_ReadNACK(void);
+uint8_t I2C_GetStatus(void);
 
-uint8_t I2C_WriteByte(uint8_t, uint8_t);
-uint8_t I2C_WriteString(uint8_t, uint8_t*, uint8_t);
+uint8_t I2C_WriteByte(uint8_t addr, uint8_t data);
+uint8_t I2C_WriteString(uint8_t addr, uint8_t* data, uint8_t size);
 
 
 #endif /* I2C_H_ */

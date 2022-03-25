@@ -10,9 +10,9 @@
 #define NHC_LCD_H_
 
 
-#include "i2c/i2c.h"
+#include "../i2c/i2c.h"
 
-
+uint8_t LCD_WriteCommand(uint8_t addr, uint8_t command);
 
 
 #endif /* NHC_LCD_H_ */

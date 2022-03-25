@@ -86,6 +86,7 @@ uint8_t I2C_GetStatus(void)
 	return status;
 }
 
+
 /**
 *	7-bit addressing mode
 *	Returns 0 on success and status code on failure

@@ -35,7 +35,7 @@ EIFR - external intrerrupt flag register flags are automaticaly cleard when inte
 
 code below
 
-
+NEW: https://www.youtube.com/watch?v=ZDtRWmBMCmw
 
 */
 
@@ -44,10 +44,11 @@ code below
 
 #include <avr/io.h>
 #include <util/delay.h>
-
 #include <avr/interrupt.h>
+#include <stdio.h>
 
 #include "i2c/i2c.h"
+#include "NHC_LCD/NHC_LCD.h"
 
 /** check my schematic on rotary encoder for A and B */
 volatile uint8_t A_trace = 0;
@@ -57,9 +58,10 @@ volatile uint8_t B_trace = 0;
 volatile uint8_t right = 0;
 volatile uint8_t left = 0;
 
-volatile uint8_t count = 0;
+volatile uint8_t count = 3;
+char count_buf[9] = {0};
 
-volatile uint8_t updateLCD = 0;
+volatile uint8_t updateLCD = 1;
 
 
 
@@ -67,6 +69,7 @@ int main(void)
 {	
 	uint8_t status = 0;
 	uint8_t *str = (uint8_t*)"Jocke";
+	uint8_t *str1 = (uint8_t*)"rules";
 	
 	DDRD |= 0xff;
 	PORTD = 0x00;
@@ -83,16 +86,22 @@ int main(void)
 	else
 		PORTD = 0xff;										// means all leds are off. status OK! ;)
 		
-		
 
-	DDRD |= 0b00000000;										// Set all pins to 1 to make it outputs
-	DDRD &= 0b10011111;										// clear bit 5 and 6 so they are inputs for rotary encoder
+//	DDRD |= 0b00000000;										// Set all pins to 1 to make it outputs
+//	DDRD &= 0b10011111;										// clear bit 5 and 6 so they are inputs for rotary encoder
 
-	PORTD |= 0b10001100;									// disable pull up resistors on PORTD.
+	PORTD = 0x02;									
 	
-	
+	_delay_ms(2);
+	LCD_WriteCommand(0x50, 0x46);
+	_delay_ms(2);
+	I2C_WriteString(0x50, str1, 0x05);	
+
+
+
     while (1) 
     {
+		/*
 		if ((PIND & (1 << PIND5)) == (1 << PIND5)) 
 		{
 			// pin is high, do nothing
@@ -135,11 +144,14 @@ int main(void)
 			right = 0;
 			left = 0;
 		}
-		
+		*/
 		if (updateLCD == 1)
 		{
-			I2C_WriteByte(0x50, 65);
+			snprintf(count_buf, 0x09, "%08d", count);
+			I2C_WriteString(0x50, (uint8_t *)count_buf, 0x08);
+			updateLCD = 0;
 		}
+		
     }
 }
 
