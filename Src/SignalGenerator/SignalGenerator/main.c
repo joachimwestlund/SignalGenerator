@@ -52,7 +52,9 @@ NEW: https://www.youtube.com/watch?v=ZDtRWmBMCmw
 #include "NHC_LCD/NHC_LCD.h"
 
 volatile uint8_t count = 0;
+volatile uint8_t set_count = 0;
 char count_buf[4] = {0};
+char set_count_buf[4] = {0};
 
 volatile uint8_t updateLCD = 1;
 
@@ -90,16 +92,25 @@ int main(void)
 	}
 	else
 		PORTD = 0xff;										// means all leds are off. status OK! ;)
+		
+	DDRD &= 0b01111111;										// pin7 as input
+	PORTD |= 0b10000000;									// enable pull-up on pin7
 
 	// Lets enable PCINT21 on pin PD5
 	DDRD &= 0b11011111;										// pin5 port d are input
-	PORTD |= 0b00100000;									// enable pull-ups on pin5
+	PORTD |= 0b00100000;									// enable pull-ups on pin
 	PCICR = (1 << PCIE2);
 	PCMSK2 |= 0b00100000;									// pin pd5 enabled for interrupt. pcint21 as interrupt.
 	sei();
 	
     while (1) 
     {
+		if ((PIND & (1 << PIND7)) != (1 << PIND7))			// is pin7 low?
+		{
+				set_count = count;
+				updateLCD = 1;
+		}
+		
 		if (updateLCD == 1)
 		{
 			_delay_ms(2);
@@ -107,6 +118,13 @@ int main(void)
 			snprintf(count_buf, 0x04, "%03d", count);
 			_delay_ms(2);
 			I2C_WriteString(0x50, (uint8_t *)count_buf, 0x03);
+			
+			_delay_ms(2);
+			LCD_WriteCommand(0x50, 0x45, 0x4a);
+			snprintf(set_count_buf, 0x04, "%03d", set_count);
+			_delay_ms(2);
+			I2C_WriteString(0x50, (uint8_t *)set_count_buf, 0x03);
+
 			updateLCD = 0;
 		}
 		
