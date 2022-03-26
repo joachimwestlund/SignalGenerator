@@ -39,10 +39,6 @@ Discarded input sections
  .text          0x00000000        0x0 main.o
  .data          0x00000000        0x0 main.o
  .bss           0x00000000        0x0 main.o
- .bss.left      0x00000000        0x1 main.o
- .bss.right     0x00000000        0x1 main.o
- .bss.B_trace   0x00000000        0x1 main.o
- .bss.A_trace   0x00000000        0x1 main.o
  .text          0x00000000        0x0 NHC_LCD/NHC_LCD.o
  .data          0x00000000        0x0 NHC_LCD/NHC_LCD.o
  .bss           0x00000000        0x0 NHC_LCD/NHC_LCD.o
@@ -269,7 +265,7 @@ END GROUP
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000      0x872
+.text           0x00000000      0x8c0
  *(.vectors)
  .vectors       0x00000000       0x68 D:/Program/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega328p/avr5/crtatmega328p.o
                 0x00000000                __vector_default
@@ -342,7 +338,6 @@ END GROUP
                 0x000000a2                __vector_17
                 0x000000a2                __vector_19
                 0x000000a2                __vector_7
-                0x000000a2                __vector_5
                 0x000000a2                __vector_4
                 0x000000a2                __vector_9
                 0x000000a2                __vector_2
@@ -374,40 +369,43 @@ END GROUP
  .text.I2C_WriteString
                 0x000000ec       0x6e i2c/i2c.o
                 0x000000ec                I2C_WriteString
- .text.main     0x0000015a       0xc0 main.o
-                0x0000015a                main
+ .text.__vector_5
+                0x0000015a       0x3c main.o
+                0x0000015a                __vector_5
+ .text.main     0x00000196       0xd2 main.o
+                0x00000196                main
  .text.LCD_WriteCommand
-                0x0000021a       0x64 NHC_LCD/NHC_LCD.o
-                0x0000021a                LCD_WriteCommand
+                0x00000268       0x64 NHC_LCD/NHC_LCD.o
+                0x00000268                LCD_WriteCommand
  .text.avr-libc
-                0x0000027e       0x60 d:/program/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(snprintf.o)
-                0x0000027e                snprintf
+                0x000002cc       0x60 d:/program/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(snprintf.o)
+                0x000002cc                snprintf
  .text.avr-libc
-                0x000002de      0x3c2 d:/program/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(vfprintf_std.o)
-                0x000002de                vfprintf
+                0x0000032c      0x3c2 d:/program/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(vfprintf_std.o)
+                0x0000032c                vfprintf
  .text.avr-libc
-                0x000006a0       0x16 d:/program/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(strnlen_P.o)
-                0x000006a0                strnlen_P
+                0x000006ee       0x16 d:/program/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(strnlen_P.o)
+                0x000006ee                strnlen_P
  .text.avr-libc
-                0x000006b6       0x16 d:/program/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(strnlen.o)
-                0x000006b6                strnlen
+                0x00000704       0x16 d:/program/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(strnlen.o)
+                0x00000704                strnlen
  .text.avr-libc
-                0x000006cc       0x78 d:/program/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(fputc.o)
-                0x000006cc                fputc
+                0x0000071a       0x78 d:/program/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(fputc.o)
+                0x0000071a                fputc
  .text.avr-libc
-                0x00000744       0xbc d:/program/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(ultoa_invert.o)
-                0x00000744                __ultoa_invert
+                0x00000792       0xbc d:/program/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(ultoa_invert.o)
+                0x00000792                __ultoa_invert
  .text.libgcc.prologue
-                0x00000800       0x38 d:/program/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_prologue.o)
-                0x00000800                __prologue_saves__
+                0x0000084e       0x38 d:/program/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_prologue.o)
+                0x0000084e                __prologue_saves__
  .text.libgcc.prologue
-                0x00000838       0x36 d:/program/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_epilogue.o)
-                0x00000838                __epilogue_restores__
-                0x0000086e                . = ALIGN (0x2)
+                0x00000886       0x36 d:/program/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_epilogue.o)
+                0x00000886                __epilogue_restores__
+                0x000008bc                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x0000086e        0x0 d:/program/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
-                0x0000086e                _exit
-                0x0000086e                exit
+ .fini9         0x000008bc        0x0 d:/program/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
+                0x000008bc                _exit
+                0x000008bc                exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -426,46 +424,47 @@ END GROUP
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x0000086e        0x4 d:/program/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
+ .fini0         0x000008bc        0x4 d:/program/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
  *(.fini0)
-                0x00000872                _etext = .
+                0x000008c0                _etext = .
 
-.data           0x00800100       0x16 load address 0x00000872
+.data           0x00800100       0x16 load address 0x000008c0
                 0x00800100                PROVIDE (__data_start, .)
  *(.data)
  *(.data*)
  .data.updateLCD
                 0x00800100        0x1 main.o
                 0x00800100                updateLCD
- .data.count    0x00800101        0x1 main.o
-                0x00800101                count
  *(.gnu.linkonce.d*)
  *(.rodata)
  *(.rodata*)
  .rodata.str1.1
-                0x00800102       0x14 main.o
+                0x00800101       0x14 main.o
  *(.gnu.linkonce.r*)
                 0x00800116                . = ALIGN (0x2)
+ *fill*         0x00800115        0x1 
                 0x00800116                _edata = .
                 0x00800116                PROVIDE (__data_end, .)
 
-.bss            0x00800116        0x4
+.bss            0x00800116        0x5
                 0x00800116                PROVIDE (__bss_start, .)
  *(.bss)
  *(.bss*)
  .bss.count_buf
                 0x00800116        0x4 main.o
                 0x00800116                count_buf
+ .bss.count     0x0080011a        0x1 main.o
+                0x0080011a                count
  *(COMMON)
-                0x0080011a                PROVIDE (__bss_end, .)
-                0x00000872                __data_load_start = LOADADDR (.data)
-                0x00000888                __data_load_end = (__data_load_start + SIZEOF (.data))
+                0x0080011b                PROVIDE (__bss_end, .)
+                0x000008c0                __data_load_start = LOADADDR (.data)
+                0x000008d6                __data_load_end = (__data_load_start + SIZEOF (.data))
 
-.noinit         0x0080011a        0x0
+.noinit         0x0080011b        0x0
                 [!provide]                PROVIDE (__noinit_start, .)
  *(.noinit*)
                 [!provide]                PROVIDE (__noinit_end, .)
-                0x0080011a                _end = .
+                0x0080011b                _end = .
                 [!provide]                PROVIDE (__heap_start, .)
 
 .eeprom         0x00810000        0x0
@@ -536,60 +535,60 @@ END GROUP
 .debug_sfnames
  *(.debug_sfnames)
 
-.debug_aranges  0x00000000       0xa0
+.debug_aranges  0x00000000       0xa8
  *(.debug_aranges)
  .debug_aranges
                 0x00000000       0x60 i2c/i2c.o
  .debug_aranges
-                0x00000060       0x20 main.o
+                0x00000060       0x28 main.o
  .debug_aranges
-                0x00000080       0x20 NHC_LCD/NHC_LCD.o
+                0x00000088       0x20 NHC_LCD/NHC_LCD.o
 
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x00000000      0xc5a
+.debug_info     0x00000000      0xc28
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x00000000      0x5f4 D:/Program/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega328p/avr5/crtatmega328p.o
  .debug_info    0x000005f4      0x291 i2c/i2c.o
- .debug_info    0x00000885      0x247 main.o
- .debug_info    0x00000acc      0x18e NHC_LCD/NHC_LCD.o
+ .debug_info    0x00000885      0x215 main.o
+ .debug_info    0x00000a9a      0x18e NHC_LCD/NHC_LCD.o
 
-.debug_abbrev   0x00000000      0x87c
+.debug_abbrev   0x00000000      0x894
  *(.debug_abbrev)
  .debug_abbrev  0x00000000      0x5a2 D:/Program/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega328p/avr5/crtatmega328p.o
  .debug_abbrev  0x000005a2      0x117 i2c/i2c.o
- .debug_abbrev  0x000006b9      0x11a main.o
- .debug_abbrev  0x000007d3       0xa9 NHC_LCD/NHC_LCD.o
+ .debug_abbrev  0x000006b9      0x132 main.o
+ .debug_abbrev  0x000007eb       0xa9 NHC_LCD/NHC_LCD.o
 
-.debug_line     0x00000000      0x60d
+.debug_line     0x00000000      0x651
  *(.debug_line .debug_line.* .debug_line_end)
  .debug_line    0x00000000      0x134 D:/Program/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega328p/avr5/crtatmega328p.o
  .debug_line    0x00000134      0x250 i2c/i2c.o
- .debug_line    0x00000384      0x164 main.o
- .debug_line    0x000004e8      0x125 NHC_LCD/NHC_LCD.o
+ .debug_line    0x00000384      0x1a8 main.o
+ .debug_line    0x0000052c      0x125 NHC_LCD/NHC_LCD.o
 
-.debug_frame    0x00000000      0x148
+.debug_frame    0x00000000      0x168
  *(.debug_frame)
  .debug_frame   0x00000000       0xd4 i2c/i2c.o
- .debug_frame   0x000000d4       0x40 main.o
- .debug_frame   0x00000114       0x34 NHC_LCD/NHC_LCD.o
+ .debug_frame   0x000000d4       0x60 main.o
+ .debug_frame   0x00000134       0x34 NHC_LCD/NHC_LCD.o
 
-.debug_str      0x00000000      0x4a1
+.debug_str      0x00000000      0x491
  *(.debug_str)
  .debug_str     0x00000000      0x208 D:/Program/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega328p/avr5/crtatmega328p.o
  .debug_str     0x00000208      0x1d1 i2c/i2c.o
                                 0x20a (size before relaxing)
- .debug_str     0x000003d9       0x9a main.o
-                                0x21b (size before relaxing)
- .debug_str     0x00000473       0x2e NHC_LCD/NHC_LCD.o
+ .debug_str     0x000003d9       0x8a main.o
+                                0x20b (size before relaxing)
+ .debug_str     0x00000463       0x2e NHC_LCD/NHC_LCD.o
                                 0x1df (size before relaxing)
 
-.debug_loc      0x00000000      0x4aa
+.debug_loc      0x00000000      0x4e6
  *(.debug_loc)
  .debug_loc     0x00000000      0x2f8 i2c/i2c.o
- .debug_loc     0x000002f8       0x8a main.o
- .debug_loc     0x00000382      0x128 NHC_LCD/NHC_LCD.o
+ .debug_loc     0x000002f8       0xc6 main.o
+ .debug_loc     0x000003be      0x128 NHC_LCD/NHC_LCD.o
 
 .debug_macinfo
  *(.debug_macinfo)
@@ -609,11 +608,11 @@ END GROUP
 .debug_pubtypes
  *(.debug_pubtypes)
 
-.debug_ranges   0x00000000       0x70
+.debug_ranges   0x00000000       0x78
  *(.debug_ranges)
  .debug_ranges  0x00000000       0x50 i2c/i2c.o
- .debug_ranges  0x00000050       0x10 main.o
- .debug_ranges  0x00000060       0x10 NHC_LCD/NHC_LCD.o
+ .debug_ranges  0x00000050       0x18 main.o
+ .debug_ranges  0x00000068       0x10 NHC_LCD/NHC_LCD.o
 
 .debug_macro
  *(.debug_macro)

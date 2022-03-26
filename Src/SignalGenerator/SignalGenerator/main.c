@@ -51,29 +51,32 @@ NEW: https://www.youtube.com/watch?v=ZDtRWmBMCmw
 #include "i2c/i2c.h"
 #include "NHC_LCD/NHC_LCD.h"
 
-/** check my schematic on rotary encoder for A and B */
-volatile uint8_t A_trace = 0;
-/** check my schematic on rotary encoder for A and B */
-volatile uint8_t B_trace = 0;
-
-volatile uint8_t right = 0;
-volatile uint8_t left = 0;
-
 volatile uint8_t count = 0;
 char count_buf[4] = {0};
 
 volatile uint8_t updateLCD = 1;
 
-
+ISR (PCINT2_vect)
+{
+	if ((PIND & (1 << PIND5)) != (1 << PIND5))				// if interrupt pin is low
+	{
+		if ((PIND & (1 << PIND6)) != (1 << PIND6))			// and if the pd6 pin is low then the direction is left
+		{
+			count--;	
+		}
+		else
+		{
+			count++;										// if pd6 is high then the direction is right
+		}
+		updateLCD = 1;
+	}
+}
 
 int main(void)
 {	
 	uint8_t status = 0;
 	uint8_t *str = (uint8_t*)"Rotary Encoder";
 	
-	DDRD |= 0xff;
-	PORTD = 0xff;
-		
 	_delay_ms(100);		// delay so the LCD can initialize
 	
 	I2C_Init();
@@ -87,59 +90,16 @@ int main(void)
 	}
 	else
 		PORTD = 0xff;										// means all leds are off. status OK! ;)
-		
 
-//	DDRD |= 0b00000000;										// Set all pins to 1 to make it outputs
-//	DDRD &= 0b10011111;										// clear bit 5 and 6 so they are inputs for rotary encoder
-
-	PORTD = 0x02;									
+	// Lets enable PCINT21 on pin PD5
+	DDRD &= 0b11011111;										// pin5 port d are input
+	PORTD |= 0b00100000;									// enable pull-ups on pin5
+	PCICR = (1 << PCIE2);
+	PCMSK2 |= 0b00100000;									// pin pd5 enabled for interrupt. pcint21 as interrupt.
+	sei();
 	
     while (1) 
     {
-		/*
-		if ((PIND & (1 << PIND5)) == (1 << PIND5)) 
-		{
-			// pin is high, do nothing
-		} 
-		else
-		{
-			if (left == 0)
-			{
-				right = 1;
-				A_trace = 1;
-			}
-		}
-		if ((PIND & (1 << PIND6)) == (1 << PIND6))
-		{
-			// pin high, do nothing
-		}
-		else
-		{
-			if (right == 0)
-			{
-				left = 1;
-				B_trace = 1;
-			}
-		}
-		
-		if (A_trace == 1 && B_trace == 1)
-		{
-			if (right == 1)
-			{
-				count++;
-				updateLCD = 1;
-			}
-			if (left == 1)
-			{
-				count--;
-				updateLCD = 1;
-			}
-			A_trace = 0;
-			B_trace = 0;
-			right = 0;
-			left = 0;
-		}
-		*/
 		if (updateLCD == 1)
 		{
 			_delay_ms(2);
