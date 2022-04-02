@@ -101,6 +101,7 @@ int main(void)
 	PORTD |= 0b00100000;									// enable pull-ups on pin
 	PCICR = (1 << PCIE2);
 	PCMSK2 |= 0b00100000;									// pin pd5 enabled for interrupt. pcint21 as interrupt.
+	
 	sei();
 	
     while (1) 
