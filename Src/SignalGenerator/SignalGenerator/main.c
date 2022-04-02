@@ -79,26 +79,29 @@ int main(void)
 	uint8_t status = 0;
 	uint8_t *str = (uint8_t*)"Rotary Encoder";
 	
+	DDRB |= (1 << PINB0);
+	PORTB |= (1 << PINB0);
+	
 	_delay_ms(100);		// delay so the LCD can initialize
 	
 	I2C_Init();
 	
 	LCD_WriteCommand(0x50, 0x51, 0x00);
 	_delay_ms(2);
-	if ((status = I2C_WriteString(0x50, str, strlen((char *)str))) != 0)	// send an 'A' to LCD
+	if ((status = I2C_WriteString(0x50, str, strlen((char *)str))) != 0)
 	{
-		PORTD = ~(status);									// invert output to LEDS so they are shown correctly.
+		//PORTD = ~(status);									// invert output to LEDS so they are shown correctly.
 		while(1) {}											// Halt program
 	}
-	else
-		PORTD = 0xff;										// means all leds are off. status OK! ;)
+	//else
+		//PORTD = 0xff;										// means all leds are off. status OK! ;)
 		
-	DDRD &= 0b01111111;										// pin7 as input
-	PORTD |= 0b10000000;									// enable pull-up on pin7
+	//DDRD &= 0b01111111;										// pin7 as input
+	//PORTD |= 0b10000000;									// enable pull-up on pin7	these where used to debug stuff
 
 	// Lets enable PCINT21 on pin PD5
-	DDRD &= 0b11011111;										// pin5 port d are input
-	PORTD |= 0b00100000;									// enable pull-ups on pin
+	DDRD &= 0b11011111;										// pin5 port d is input
+	PORTD |= 0b00100000;									// enable pull-up on pin
 	PCICR = (1 << PCIE2);
 	PCMSK2 |= 0b00100000;									// pin pd5 enabled for interrupt. pcint21 as interrupt.
 	
@@ -110,6 +113,7 @@ int main(void)
 		{
 				set_count = count;
 				updateLCD = 1;
+				PORTB ^= (1 << PINB0);						// shift on or off led for testing
 		}
 		
 		if (updateLCD == 1)
