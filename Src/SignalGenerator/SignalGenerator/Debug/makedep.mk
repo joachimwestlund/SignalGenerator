@@ -8,3 +8,5 @@ main.c
 
 NHC_LCD\NHC_LCD.c
 
+SPI\SPI.c
+

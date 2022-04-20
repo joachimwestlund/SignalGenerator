@@ -164,9 +164,16 @@
     <Compile Include="NHC_LCD\NHC_LCD.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="SPI\SPI.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="SPI\SPI.h">
+      <SubType>compile</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="i2c" />
+    <Folder Include="SPI" />
     <Folder Include="NHC_LCD" />
   </ItemGroup>
   <Import Project="$(AVRSTUDIO_EXE_PATH)\\Vs\\Compiler.targets" />

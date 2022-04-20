@@ -50,6 +50,7 @@ NEW: https://www.youtube.com/watch?v=ZDtRWmBMCmw
 
 #include "i2c/i2c.h"
 #include "NHC_LCD/NHC_LCD.h"
+#include "SPI/SPI.h"
 
 volatile uint8_t count = 0;
 volatile uint8_t set_count = 0;
@@ -77,7 +78,7 @@ ISR (PCINT2_vect)
 int main(void)
 {	
 	uint8_t status = 0;
-	uint8_t *str = (uint8_t*)"Rotary Encoder";
+	uint8_t *str = (uint8_t*)"12500000 Hz";
 	
 	DDRB |= (1 << PINB0);
 	PORTB |= (1 << PINB0);
@@ -105,7 +106,21 @@ int main(void)
 	PCICR = (1 << PCIE2);
 	PCMSK2 |= 0b00100000;									// pin pd5 enabled for interrupt. pcint21 as interrupt.
 	
+	SPI_Init();
+	
 	sei();
+	
+	SPI_Tranceiver(0x78);
+	SPI_Tranceiver(0x79);
+	SPI_End_Transfer();
+	_delay_ms(10);
+	SPI_Start_Transfer();
+	SPI_Tranceiver(0x80);
+	SPI_Tranceiver(0x81);
+	SPI_End_Transfer();
+	
+	
+	
 	
     while (1) 
     {
@@ -113,7 +128,7 @@ int main(void)
 		{
 				set_count = count;
 				updateLCD = 1;
-				PORTB ^= (1 << PINB0);						// shift on or off led for testing
+				//PORTB ^= (1 << PINB0);						// shift on or off led for testing
 		}
 		
 		if (updateLCD == 1)

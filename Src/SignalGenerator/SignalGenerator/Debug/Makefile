@@ -34,6 +34,7 @@ LINKER_SCRIPT_DEP:=
 # Every subdirectory with source files must be described here
 SUBDIRS :=  \
 ../i2c \
+../SPI \
 ../NHC_LCD
 
 
@@ -41,7 +42,8 @@ SUBDIRS :=  \
 C_SRCS +=  \
 ../i2c/i2c.c \
 ../main.c \
-../NHC_LCD/NHC_LCD.c
+../NHC_LCD/NHC_LCD.c \
+../SPI/SPI.c
 
 
 PREPROCESSING_SRCS += 
@@ -53,22 +55,26 @@ ASM_SRCS +=
 OBJS +=  \
 i2c/i2c.o \
 main.o \
-NHC_LCD/NHC_LCD.o
+NHC_LCD/NHC_LCD.o \
+SPI/SPI.o
 
 OBJS_AS_ARGS +=  \
 i2c/i2c.o \
 main.o \
-NHC_LCD/NHC_LCD.o
+NHC_LCD/NHC_LCD.o \
+SPI/SPI.o
 
 C_DEPS +=  \
 i2c/i2c.d \
 main.d \
-NHC_LCD/NHC_LCD.d
+NHC_LCD/NHC_LCD.d \
+SPI/SPI.d
 
 C_DEPS_AS_ARGS +=  \
 i2c/i2c.d \
 main.d \
-NHC_LCD/NHC_LCD.d
+NHC_LCD/NHC_LCD.d \
+SPI/SPI.d
 
 OUTPUT_FILE_PATH +=SignalGenerator.elf
 
@@ -99,6 +105,13 @@ i2c/i2c.o: ../i2c/i2c.c
 	
 
 NHC_LCD/NHC_LCD.o: ../NHC_LCD/NHC_LCD.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)D:\Program\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"D:\Program\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\include" -I"../i2cmaster" -I"../NHD-0420"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega328p -B "D:\Program\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\gcc\dev\atmega328p" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+SPI/SPI.o: ../SPI/SPI.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 5.4.0
 	$(QUOTE)D:\Program\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"D:\Program\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\include" -I"../i2cmaster" -I"../NHD-0420"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega328p -B "D:\Program\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\gcc\dev\atmega328p" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
