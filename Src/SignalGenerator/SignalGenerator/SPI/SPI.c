@@ -12,8 +12,10 @@ void SPI_Init(void)
 {
 	// SS, MOSI and CLK as outputs
 	DDRB |= (1 << PINB2) | (1 << PINB3) | (1 << PINB5);
+	
 	// MISO as input
 	DDRB &= ~(1 << PINB4);
+	
 	SPI_End_Transfer();
 	
 	// SPCR |= ~(1 << SPIE) | (1 << SPE) | (1 << DORD) | (1 << MSTR) | ~(1 << CPOL) | ~(1 << CPHA) | ~(1 << SPR1) | ~(1 << SPR0);

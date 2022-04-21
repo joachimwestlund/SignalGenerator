@@ -34,12 +34,14 @@ LINKER_SCRIPT_DEP:=
 # Every subdirectory with source files must be described here
 SUBDIRS :=  \
 ../i2c \
+../AD9833 \
 ../SPI \
 ../NHC_LCD
 
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS +=  \
+../AD9833/AD9833.c \
 ../i2c/i2c.c \
 ../main.c \
 ../NHC_LCD/NHC_LCD.c \
@@ -53,24 +55,28 @@ ASM_SRCS +=
 
 
 OBJS +=  \
+AD9833/AD9833.o \
 i2c/i2c.o \
 main.o \
 NHC_LCD/NHC_LCD.o \
 SPI/SPI.o
 
 OBJS_AS_ARGS +=  \
+AD9833/AD9833.o \
 i2c/i2c.o \
 main.o \
 NHC_LCD/NHC_LCD.o \
 SPI/SPI.o
 
 C_DEPS +=  \
+AD9833/AD9833.d \
 i2c/i2c.d \
 main.d \
 NHC_LCD/NHC_LCD.d \
 SPI/SPI.d
 
 C_DEPS_AS_ARGS +=  \
+AD9833/AD9833.d \
 i2c/i2c.d \
 main.d \
 NHC_LCD/NHC_LCD.d \
@@ -90,6 +96,13 @@ LINKER_SCRIPT_DEP+=
 
 
 # AVR32/GNU C Compiler
+AD9833/AD9833.o: ../AD9833/AD9833.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)D:\Program\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"D:\Program\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\include" -I"../i2cmaster" -I"../NHD-0420"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega328p -B "D:\Program\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\gcc\dev\atmega328p" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
 i2c/i2c.o: ../i2c/i2c.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 5.4.0

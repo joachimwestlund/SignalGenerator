@@ -50,7 +50,7 @@ NEW: https://www.youtube.com/watch?v=ZDtRWmBMCmw
 
 #include "i2c/i2c.h"
 #include "NHC_LCD/NHC_LCD.h"
-#include "SPI/SPI.h"
+#include "AD9833/AD9833.h"
 
 volatile uint8_t count = 0;
 volatile uint8_t set_count = 0;
@@ -80,9 +80,6 @@ int main(void)
 	uint8_t status = 0;
 	uint8_t *str = (uint8_t*)"12500000 Hz";
 	
-	DDRB |= (1 << PINB0);
-	PORTB |= (1 << PINB0);
-	
 	_delay_ms(100);		// delay so the LCD can initialize
 	
 	I2C_Init();
@@ -91,14 +88,8 @@ int main(void)
 	_delay_ms(2);
 	if ((status = I2C_WriteString(0x50, str, strlen((char *)str))) != 0)
 	{
-		//PORTD = ~(status);									// invert output to LEDS so they are shown correctly.
 		while(1) {}											// Halt program
 	}
-	//else
-		//PORTD = 0xff;										// means all leds are off. status OK! ;)
-		
-	//DDRD &= 0b01111111;										// pin7 as input
-	//PORTD |= 0b10000000;									// enable pull-up on pin7	these where used to debug stuff
 
 	// Lets enable PCINT21 on pin PD5
 	DDRD &= 0b11011111;										// pin5 port d is input
@@ -106,20 +97,15 @@ int main(void)
 	PCICR = (1 << PCIE2);
 	PCMSK2 |= 0b00100000;									// pin pd5 enabled for interrupt. pcint21 as interrupt.
 	
-	SPI_Init();
-	
 	sei();
 	
-	SPI_Tranceiver(0x78);
-	SPI_Tranceiver(0x79);
-	SPI_End_Transfer();
-	_delay_ms(10);
-	SPI_Start_Transfer();
-	SPI_Tranceiver(0x80);
-	SPI_Tranceiver(0x81);
-	SPI_End_Transfer();
-	
-	
+	AD9833_Init();
+	AD9833_Reset(1);
+	AD9833_SetFreq(1000);				// 1kHz
+	AD9833_SetPhase(0);					// 0 phase shift
+	AD9833_SetFreqPhasePRegister(0);	// freq0 and phase0 registers
+	AD9833_SetMode(0);					// Sine
+	AD9833_Reset(0);
 	
 	
     while (1) 
@@ -128,7 +114,6 @@ int main(void)
 		{
 				set_count = count;
 				updateLCD = 1;
-				//PORTB ^= (1 << PINB0);						// shift on or off led for testing
 		}
 		
 		if (updateLCD == 1)

@@ -149,6 +149,12 @@
     </ToolchainSettings>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="AD9833\AD9833.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="AD9833\AD9833.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="i2c\i2c.c">
       <SubType>compile</SubType>
     </Compile>
@@ -173,6 +179,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="i2c" />
+    <Folder Include="AD9833" />
     <Folder Include="SPI" />
     <Folder Include="NHC_LCD" />
   </ItemGroup>
