@@ -9,7 +9,10 @@ SPI/SPI.d SPI/SPI.o: ../SPI/SPI.c ../SPI/SPI.h \
  d:\program\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\common.h \
  d:\program\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\version.h \
  d:\program\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\fuse.h \
- d:\program\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\lock.h
+ d:\program\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\lock.h \
+ d:\program\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\util\delay.h \
+ d:\program\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\util\delay_basic.h \
+ d:\program\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\math.h
 
 ../SPI/SPI.h:
 
@@ -34,3 +37,9 @@ d:\program\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\ve
 d:\program\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\fuse.h:
 
 d:\program\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\lock.h:
+
+d:\program\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\util\delay.h:
+
+d:\program\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\util\delay_basic.h:
+
+d:\program\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\math.h:

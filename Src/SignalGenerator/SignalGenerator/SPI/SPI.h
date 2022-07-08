@@ -17,7 +17,10 @@
 #ifndef SPI_H_
 #define SPI_H_
 
+#define F_CPU 16000000UL
+
 #include <avr/io.h>
+#include <util/delay.h>
 
 void SPI_Init(void);
 uint8_t SPI_Tranceiver(uint8_t data);

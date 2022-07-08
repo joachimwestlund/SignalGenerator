@@ -51,6 +51,7 @@ NEW: https://www.youtube.com/watch?v=ZDtRWmBMCmw
 #include "i2c/i2c.h"
 #include "NHC_LCD/NHC_LCD.h"
 #include "AD9833/AD9833.h"
+#include "SPI/SPI.h"
 
 volatile uint8_t count = 0;
 volatile uint8_t set_count = 0;
@@ -98,8 +99,9 @@ int main(void)
 	PCMSK2 |= 0b00100000;									// pin pd5 enabled for interrupt. pcint21 as interrupt.
 	
 	sei();
-	
+
 	AD9833_Init();
+	
 	AD9833_Reset(1);
 	AD9833_SetFreq(1000);				// 1kHz
 	AD9833_SetPhase(0);					// 0 phase shift

@@ -19,7 +19,7 @@ main.d main.o: .././main.c \
  d:\program\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stddef.h \
  d:\program\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\string.h \
  .././i2c/i2c.h .././NHC_LCD/NHC_LCD.h .././NHC_LCD/../i2c/i2c.h \
- .././AD9833/AD9833.h .././AD9833/../SPI/SPI.h
+ .././AD9833/AD9833.h .././AD9833/../SPI/SPI.h .././SPI/SPI.h
 
 d:\program\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\io.h:
 
@@ -68,3 +68,5 @@ d:\program\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\string
 .././AD9833/AD9833.h:
 
 .././AD9833/../SPI/SPI.h:
+
+.././SPI/SPI.h:

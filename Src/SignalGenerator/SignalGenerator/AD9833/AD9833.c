@@ -22,7 +22,18 @@ void AD9833_Init(void)
 
 void AD9833_WriteData(uint16_t data)
 {
-	uint8_t tmp;
+/*	uint8_t MSdata = (uint8_t)((data>>8) & 0x00FF);  	//filter out MS
+	uint8_t LSdata = (uint8_t)(data & 0x00FF);			//filter out LS
+
+	SPI_Start_Transfer();
+		
+	SPI_Tranceiver(MSdata);
+	SPI_Tranceiver(LSdata);
+	
+	SPI_End_Transfer();
+	*/
+	uint8_t tmp = 0;
+	
 	// get high byte of data
 	tmp = (uint8_t)(data >> 8);
 	SPI_Start_Transfer();
@@ -31,6 +42,7 @@ void AD9833_WriteData(uint16_t data)
 	tmp = (uint8_t)(data & 0x00ff);
 	SPI_Tranceiver(tmp);
 	SPI_End_Transfer();
+	
 }
 
 /**

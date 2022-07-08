@@ -11,7 +11,9 @@ AD9833/AD9833.d AD9833/AD9833.o: ../AD9833/AD9833.c ../AD9833/AD9833.h \
  d:\program\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\fuse.h \
  d:\program\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\lock.h \
  d:\program\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\math.h \
- ../AD9833/../SPI/SPI.h
+ ../AD9833/../SPI/SPI.h \
+ d:\program\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\util\delay.h \
+ d:\program\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\util\delay_basic.h
 
 ../AD9833/AD9833.h:
 
@@ -40,3 +42,7 @@ d:\program\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\lo
 d:\program\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\math.h:
 
 ../AD9833/../SPI/SPI.h:
+
+d:\program\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\util\delay.h:
+
+d:\program\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\util\delay_basic.h:
