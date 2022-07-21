@@ -81,6 +81,9 @@ int main(void)
 	uint8_t status = 0;
 	uint8_t *str = (uint8_t*)"12500000 Hz";
 	
+	PORTB |= (1 << DDB0);	// turn led on
+	DDRB |= (1 << DDB0);
+	
 	_delay_ms(100);		// delay so the LCD can initialize
 	
 	I2C_Init();

@@ -11,9 +11,9 @@
 void SPI_Init(void)
 {
 	
-	PORTB |= (1 << DDB3);
-	PORTB |= (1 << DDB5);
-	PORTB |= (1 << DDB2);
+	PORTB |= (1 << PORTB3);
+	PORTB |= (1 << PORTB5);
+	PORTB |= (1 << PORTB2);
 	
 	// SS, MOSI and CLK as outputs
 	DDRB |= (1 << DDB2) | (1 << DDB3) | (1 << DDB5);
@@ -21,12 +21,14 @@ void SPI_Init(void)
 	// MISO as input
 	DDRB &= ~(1 << DDB4);
 
-	
 	// SPCR |= ~(1 << SPIE) | (1 << SPE) | (1 << DORD) | (1 << MSTR) | ~(1 << CPOL) | ~(1 << CPHA) | ~(1 << SPR1) | ~(1 << SPR0);
+	
+	PRR &= ~(1 << PRSPI);
 	
 	SPSR &= ~(1 << SPI2X);
 	// Enable SPI 4Mhz clock no interrupt enable. LSB. CPOL=1, CPHA=0
 	SPCR = 0b01011000;
+	
 	
 }
 
