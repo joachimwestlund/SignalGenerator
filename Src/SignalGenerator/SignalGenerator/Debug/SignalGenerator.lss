@@ -999,15 +999,15 @@ uint8_t LCD_WriteCommand(uint8_t addr, uint8_t command, uint8_t data)
 void SPI_Init(void)
 {
 	
-	PORTB |= (1 << DDB3);
+	PORTB |= (1 << PORTB3);
  606:	85 b1       	in	r24, 0x05	; 5
  608:	88 60       	ori	r24, 0x08	; 8
  60a:	85 b9       	out	0x05, r24	; 5
-	PORTB |= (1 << DDB5);
+	PORTB |= (1 << PORTB5);
  60c:	85 b1       	in	r24, 0x05	; 5
  60e:	80 62       	ori	r24, 0x20	; 32
  610:	85 b9       	out	0x05, r24	; 5
-	PORTB |= (1 << DDB2);
+	PORTB |= (1 << PORTB2);
  612:	85 b1       	in	r24, 0x05	; 5
  614:	84 60       	ori	r24, 0x04	; 4
  616:	85 b9       	out	0x05, r24	; 5
